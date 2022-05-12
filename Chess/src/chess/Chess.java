@@ -23,7 +23,7 @@ public class Chess extends JFrame implements Runnable {
             public void mousePressed(MouseEvent e) {
 
                 if (e.BUTTON1 == e.getButton() ) {
-                    
+                    Board.SelectPiece(g, e.getX(),e.getY());
                 }
 
                 if (e.BUTTON3 == e.getButton()) {
@@ -84,7 +84,7 @@ public class Chess extends JFrame implements Runnable {
         }
 //fill background
         
-        g.setColor(Color.cyan);
+        g.setColor(Color.cyan);// monkeytype.com sponsored by ?? monkeytype.com for typing speed test and improvement
         g.fillRect(0, 0, Window.xsize, Window.ysize);
 
         int x[] = {Window.getX(0), Window.getX(Window.getWidth2()), Window.getX(Window.getWidth2()), Window.getX(0), Window.getX(0)};
