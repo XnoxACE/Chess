@@ -13,12 +13,12 @@ public class Piece {
     Image pieceImage;
     public int row;
     public int col;
-    Piece(Color _color, int xpos, int ypos)
+    Piece(Color _color, int xpos, int ypos, Type _type)
     {
         color = _color;
         row = xpos;
         col = ypos;
-        //type = _type;
+        type = _type;
         //Rules pieceRules = new Rules(this);
         pos = new Position(xpos, ypos);
         

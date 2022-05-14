@@ -4,6 +4,8 @@
 package chess;
 import java.awt.*;
 
+import chess.Piece.Type;
+
 public class Board {
     private final static int NUM_ROWS = 8;
     private final static int NUM_COLUMNS = 8;      
@@ -98,11 +100,40 @@ public class Board {
         for (int zrow=0;zrow<NUM_ROWS;zrow++)
         {
             for (int zcol=0;zcol<NUM_COLUMNS;zcol++)        
+
+
             {
-                if (zrow == 0 || zrow == 1)
-                    board[zrow][zcol] = new Piece(new Color(82, 69, 86), zrow, zcol);
-                if (zrow == 6 || zrow == 7)
-                    board[zrow][zcol] = new Piece(new Color(250, 236, 226), zrow, zcol);
+
+                // black pieces
+                if (zrow == 1)
+                    board[zrow][zcol] = new Piece(new Color(82, 69, 86), zrow, zcol, Type.pawn);
+                if(zrow == 0 && zcol == 3)
+                    board[zrow][zcol] = new Piece(new Color(82, 69, 86), zrow, zcol, Type.queen);
+                if(zrow == 0 && zcol == 4)
+                    board[zrow][zcol] = new Piece(new Color(82, 69, 86), zrow, zcol, Type.king);
+                if(zrow == 0 && (zcol == 2 || zcol == 5))
+                    board[zrow][zcol] = new Piece(new Color(82, 69, 86), zrow, zcol, Type.bishop);
+                if(zrow == 0 && (zcol == 1 || zcol == 6))
+                    board[zrow][zcol] = new Piece(new Color(82, 69, 86), zrow, zcol, Type.knight);
+                if(zrow == 0 && (zcol == 0 || zcol == 7))
+                    board[zrow][zcol] = new Piece(new Color(82, 69, 86), zrow, zcol, Type.rook);
+                
+               
+                    // white pieces
+                if (zrow == 6)
+                    board[zrow][zcol] = new Piece(new Color(250, 236, 226), zrow, zcol, Type.pawn);
+                if(zrow == 7 && zcol == 3)
+                    board[zrow][zcol] = new Piece(new Color(250, 236, 226), zrow, zcol, Type.queen);    
+                if(zrow == 7 && zcol == 4)
+                    board[zrow][zcol] = new Piece(new Color(250, 236, 226), zrow, zcol, Type.king);
+                if(zrow == 7 && (zcol == 2 || zcol == 5))
+                    board[zrow][zcol] = new Piece(new Color(250, 236, 226), zrow, zcol, Type.bishop);
+                if(zrow == 7 && (zcol == 1 || zcol == 6))
+                    board[zrow][zcol] = new Piece(new Color(250, 236, 226), zrow, zcol, Type.knight);
+                if(zrow == 7 && (zcol == 0 || zcol == 7))
+                    board[zrow][zcol] = new Piece(new Color(250, 236, 226), zrow, zcol, Type.rook);
+                
+                
                     
                if (board[zrow][zcol] != null)
                     board[zrow][zcol].draw(g, zrow, zcol,xdelta, ydelta);
