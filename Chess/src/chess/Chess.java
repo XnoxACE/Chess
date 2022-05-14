@@ -5,9 +5,11 @@ import java.awt.*;
 import java.awt.geom.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicTreeUI.SelectionModelPropertyChangeHandler;
 
 public class Chess extends JFrame implements Runnable {
     boolean animateFirstTime = true;
+    public static Piece selectedPiece;
     Image image;
     Graphics2D g;
 
@@ -23,7 +25,38 @@ public class Chess extends JFrame implements Runnable {
             public void mousePressed(MouseEvent e) {
 
                 if (e.BUTTON1 == e.getButton() ) {
-                    Board.SelectPiece(g, e.getX(),e.getY());
+                    if(selectedPiece != null && Board.SelectPiece(g, e.getX(),e.getY()) == null){
+
+                        int xVal = e.getX();
+                        int yVal = e.getY();
+
+                        xVal -= Window.getX(0);
+                        yVal -= Window.getY(0);
+                        
+                        if (xVal <= 0 || xVal >= Window.getWidth2() ||
+                         yVal <= 0 || yVal >= Window.getHeight2()){
+                             return;
+                         }
+                        Board.board[selectedPiece.row][selectedPiece.col] = null;
+                        selectedPiece.setPos(e.getX(),e.getY());
+                        selectedPiece.highlight = false;
+                        selectedPiece = null;
+                        
+                        
+                    }
+                    else if(selectedPiece == null && Board.SelectPiece(g, e.getX(),e.getY()) != null){
+                        selectedPiece = Board.SelectPiece(g, e.getX(),e.getY());
+                    }
+                    else if(selectedPiece != null && Board.SelectPiece(g, e.getX(),e.getY()) != null) {
+                        selectedPiece.highlight = false;
+                        selectedPiece = null;
+                        selectedPiece = Board.SelectPiece(g, e.getX(),e.getY());
+                        
+                    }
+                    
+                    
+
+
                 }
 
                 if (e.BUTTON3 == e.getButton()) {
@@ -84,16 +117,16 @@ public class Chess extends JFrame implements Runnable {
         }
 //fill background
         
-        g.setColor(Color.cyan);// monkeytype.com sponsored by ?? monkeytype.com for typing speed test and improvement
+        g.setColor(Color.black);
         g.fillRect(0, 0, Window.xsize, Window.ysize);
 
         int x[] = {Window.getX(0), Window.getX(Window.getWidth2()), Window.getX(Window.getWidth2()), Window.getX(0), Window.getX(0)};
         int y[] = {Window.getY(0), Window.getY(0), Window.getY(Window.getHeight2()), Window.getY(Window.getHeight2()), Window.getY(0)};
 //fill border
-        g.setColor(Color.white);
+        g.setColor(Color.black);
         g.fillPolygon(x, y, 4);
 // draw border
-        g.setColor(Color.red);
+        g.setColor(Color.black);
         g.drawPolyline(x, y, 5);
 
         if (animateFirstTime) {
@@ -103,6 +136,8 @@ public class Chess extends JFrame implements Runnable {
         
               
         Board.Draw(g);
+        
+        
 
         gOld.drawImage(image, 0, 0, null);
     }
@@ -125,6 +160,7 @@ public class Chess extends JFrame implements Runnable {
 /////////////////////////////////////////////////////////////////////////
     public void reset() {
         Board.Reset();
+        
     }
 /////////////////////////////////////////////////////////////////////////
     public void animate() {
@@ -134,6 +170,7 @@ public class Chess extends JFrame implements Runnable {
             if (Window.xsize != getSize().width || Window.ysize != getSize().height) {
                 Window.xsize = getSize().width;
                 Window.ysize = getSize().height;
+                
             }
 
             reset();

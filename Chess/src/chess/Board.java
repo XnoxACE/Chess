@@ -7,20 +7,28 @@ import java.awt.*;
 public class Board {
     private final static int NUM_ROWS = 8;
     private final static int NUM_COLUMNS = 8;      
-    private static Piece board[][] = new Piece[NUM_ROWS][NUM_COLUMNS];
+    public static Piece board[][] = new Piece[NUM_ROWS][NUM_COLUMNS];
+    private static boolean runOnce = true;
 
     public static void Reset() {
 //clear the board.
         for (int zrow=0;zrow<NUM_ROWS;zrow++)
             for (int zcol=0;zcol<NUM_COLUMNS;zcol++)
                 board[zrow][zcol] = null;        
+        
     }
     
     public static void Draw(Graphics2D g) {
-        boolean runOnce = true;
+        
 //draw grid
         int ydelta = Window.getHeight2()/NUM_ROWS;
         int xdelta = Window.getWidth2()/NUM_COLUMNS;
+        
+        if(runOnce){
+            DrawBoard(xdelta, ydelta, g);
+           
+            runOnce = false;
+        }
  
         g.setColor(Color.black);
         for (int zi = 1;zi<NUM_ROWS;zi++)
@@ -46,48 +54,61 @@ public class Board {
                     g.setColor(color2);
                 g.fillRect(Window.getX(zcol*xdelta),Window.getY(zrow*ydelta), xdelta, ydelta);
                 count++;
+                if(board[zrow][zcol] != null)
+                    board[zrow][zcol].draw(g, zrow, zcol, xdelta, ydelta);   
             }
             count--;
         } 
-        if(runOnce){
-        for (int zrow=0;zrow<NUM_ROWS;zrow++)
-        {
-            for (int zcol=0;zcol<NUM_COLUMNS;zcol++)        
-            {
-                if (zrow == 0 || zrow == 1)
-                    board[zrow][zcol] = new Piece(new Color(82, 69, 86));
-                if (zrow == 6 || zrow == 7)
-                    board[zrow][zcol] = new Piece(new Color(250, 236, 226));
-                    
-               if (board[zrow][zcol] != null)
-                    board[zrow][zcol].draw(g, zrow, zcol,xdelta, ydelta);
-            }
-            runOnce = false;
-        }        
+        
+        
+        
         
         
         }
         
-    }
-    public static void SelectPiece(Graphics2D g, int xVal,int yVal){
-        System.out.println("output");
+    
+    public static Piece SelectPiece(Graphics2D g, int xVal,int yVal){
+       
         xVal -= Window.getX(0);
         yVal -= Window.getY(0);
 //don't add a piece if outside the board.
-        if (xVal <= 0 || xVal >= Window.getWidth2() ||
-        yVal <= 0 || yVal >= Window.getHeight2())  //too far to the left,right,top,bottom.
-            return;
+        
         
         int ydelta = Window.getHeight2()/NUM_ROWS;
         int xdelta = Window.getWidth2()/NUM_COLUMNS;
         int col = xVal/xdelta;
         int row = yVal/ydelta;
-        System.out.println(row + " " + col);
-        board[row][col].color = Color.YELLOW;
-        System.out.println(board[row][col].getColor());
-        board[row][col].draw(g, row, col,xdelta, ydelta);
+        if (xVal <= 0 || xVal >= Window.getWidth2() ||
+        yVal <= 0 || yVal >= Window.getHeight2())  //too far to the left,right,top,bottom.
+            return null;
+        
+        
+            if(board[row][col] != null){
+            board[row][col].highlight = true;;
+            return board[row][col];
+        }
+        return null;
+        
+        
+        
   
         
+    }
+    public static void DrawBoard(int xdelta, int ydelta, Graphics2D g){
+        for (int zrow=0;zrow<NUM_ROWS;zrow++)
+        {
+            for (int zcol=0;zcol<NUM_COLUMNS;zcol++)        
+            {
+                if (zrow == 0 || zrow == 1)
+                    board[zrow][zcol] = new Piece(new Color(82, 69, 86), zrow, zcol);
+                if (zrow == 6 || zrow == 7)
+                    board[zrow][zcol] = new Piece(new Color(250, 236, 226), zrow, zcol);
+                    
+               if (board[zrow][zcol] != null)
+                    board[zrow][zcol].draw(g, zrow, zcol,xdelta, ydelta);
+            }
+            
+        }        
     }
    
 
