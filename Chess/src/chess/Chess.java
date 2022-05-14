@@ -25,38 +25,34 @@ public class Chess extends JFrame implements Runnable {
             public void mousePressed(MouseEvent e) {
 
                 if (e.BUTTON1 == e.getButton() ) {
+                    // moves slectedPiece to new location on the board
                     if(selectedPiece != null && Board.SelectPiece(g, e.getX(),e.getY()) == null){
-
+                        // David
+                        // stops piece from being placed outside the board
                         int xVal = e.getX();
                         int yVal = e.getY();
-
                         xVal -= Window.getX(0);
                         yVal -= Window.getY(0);
                         
                         if (xVal <= 0 || xVal >= Window.getWidth2() ||
                          yVal <= 0 || yVal >= Window.getHeight2()){
                              return;
-                         }
-                        Board.board[selectedPiece.row][selectedPiece.col] = null;
-                        selectedPiece.setPos(e.getX(),e.getY());
-                        selectedPiece.highlight = false;
-                        selectedPiece = null;
+                        }
                         
-                        
+                        Board.board[selectedPiece.getRow()][selectedPiece.getCol()] = null; // makes old piece position null
+                        selectedPiece.setPos(e.getX(),e.getY()); // gives piece new position
+                        selectedPiece.setHighlight(false); 
+                        selectedPiece = null; 
                     }
+                    // sets selectedPiece if selectedPiece is null
                     else if(selectedPiece == null && Board.SelectPiece(g, e.getX(),e.getY()) != null){
                         selectedPiece = Board.SelectPiece(g, e.getX(),e.getY());
                     }
+                    // sets selectedPiece if selectedPiece is not null
                     else if(selectedPiece != null && Board.SelectPiece(g, e.getX(),e.getY()) != null) {
-                        selectedPiece.highlight = false;
-                        selectedPiece = null;
+                        selectedPiece.setHighlight(false);
                         selectedPiece = Board.SelectPiece(g, e.getX(),e.getY());
-                        
                     }
-                    
-                    
-
-
                 }
 
                 if (e.BUTTON3 == e.getButton()) {
