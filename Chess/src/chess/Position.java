@@ -2,20 +2,20 @@ package chess;
 
 public class Position {
    
-    private int xpos;
-    private int ypos;
+    private int row;
+    private int col;
     private int[] XYpos = new int[2];
-    Position(int _xpos, int _ypos){
-        xpos = _xpos;
-        ypos = _ypos;
-        XYpos[0] = xpos;
-        XYpos[1] = ypos;
+    Position(int _row, int _col){
+        row = _row;
+        col = _col;
+        XYpos[0] = row;
+        XYpos[1] = col;
     }
-    public int getX() {
-        return xpos;
+    public int getRow() {
+        return row;
     }
-    public int getY() {
-        return ypos;
+    public int getCol() {
+        return col;
     }
     public int[] getXY() {        
         return XYpos;

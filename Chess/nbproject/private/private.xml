@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/800006815/Desktop/cs2/Chess/src/chess/Chess.java</file>
-            <file>file:/C:/Users/800006815/Desktop/cs2/Chess/src/chess/Piece.java</file>
-            <file>file:/C:/Users/800006815/Desktop/cs2/Chess/src/chess/Window.java</file>
-            <file>file:/C:/Users/800006815/Desktop/cs2/Chess/src/chess/Board.java</file>
-            <file>file:/C:/Users/800006815/Desktop/cs2/Chess/src/chess/Player.java</file>
+            <file>file:/C:/Users/David/OneDrive/Desktop/Chess/src/chess/Chess.java</file>
+            <file>file:/C:/Users/David/OneDrive/Desktop/Chess/src/chess/Window.java</file>
+            <file>file:/C:/Users/David/OneDrive/Desktop/Chess/src/chess/Position.java</file>
+            <file>file:/C:/Users/David/OneDrive/Desktop/Chess/src/chess/Piece.java</file>
+            <file>file:/C:/Users/David/OneDrive/Desktop/Chess/src/chess/Board.java</file>
+            <file>file:/C:/Users/David/OneDrive/Desktop/Chess/src/chess/Player.java</file>
         </group>
     </open-files>
 </project-private>

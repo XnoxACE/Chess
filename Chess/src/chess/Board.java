@@ -18,14 +18,14 @@ public class Board {
         runOnce = true;
     }
     
-    static void Draw(Graphics2D g) {
+    static void Draw(Graphics2D g, Chess thisObj) {
 //draw grid
         int ydelta = Window.getHeight2()/NUM_ROWS;
         int xdelta = Window.getWidth2()/NUM_COLUMNS;
         
         // only draws pieces once
         if(runOnce){
-            DrawPieces(xdelta, ydelta, g);
+            DrawPieces(xdelta, ydelta, g, thisObj);
             runOnce = false;
         }
  
@@ -43,8 +43,8 @@ public class Board {
         }
         // Draws Board
         int count = 1;
-        Color color = new Color(79, 72, 74);
-        Color color2 = new Color (236, 216, 155);
+        Color color = new Color(118,150,86);
+        Color color2 = new Color (238,238,210);
         for (int zrow=0;zrow<NUM_ROWS;zrow++)
         {
             for (int zcol=0;zcol<NUM_COLUMNS;zcol++){
@@ -55,7 +55,7 @@ public class Board {
                 g.fillRect(Window.getX(zcol*xdelta),Window.getY(zrow*ydelta), xdelta, ydelta);
                 count++;
                 if(board[zrow][zcol] != null)
-                    board[zrow][zcol].draw(g, zrow, zcol, xdelta, ydelta);   
+                    board[zrow][zcol].draw(g, zrow, zcol, xdelta, ydelta, thisObj);   
             }
             count--;
         } 
@@ -85,7 +85,7 @@ public class Board {
         return null;
     }
     
-    static void DrawPieces(int xdelta, int ydelta, Graphics2D g){
+    static void DrawPieces(int xdelta, int ydelta, Graphics2D g, Chess thisObj){
         //David
         for (int zrow=0;zrow<NUM_ROWS;zrow++)
         {
@@ -93,37 +93,37 @@ public class Board {
             {
                 // black pieces
                 if (zrow == 1)
-                    board[zrow][zcol] = new Piece(new Color(82, 69, 86), zrow, zcol, Type.pawn); // creates black pawns
+                    board[zrow][zcol] = new Piece(Color.black, zrow, zcol, Type.pawn, Toolkit.getDefaultToolkit().getImage("./b_pawn_png_shadow_128px.png")); // creates black pawns
                 if(zrow == 0 && zcol == 3)
-                    board[zrow][zcol] = new Piece(new Color(82, 69, 86), zrow, zcol, Type.queen); // creates black queen
+                    board[zrow][zcol] = new Piece(Color.black, zrow, zcol, Type.queen, Toolkit.getDefaultToolkit().getImage("./b_pawn_png_shadow_128px.png")); // creates black queen
                 if(zrow == 0 && zcol == 4)
-                    board[zrow][zcol] = new Piece(new Color(82, 69, 86), zrow, zcol, Type.king); // creates black king
+                    board[zrow][zcol] = new Piece(Color.black, zrow, zcol, Type.king, Toolkit.getDefaultToolkit().getImage("./b_pawn_png_shadow_128px.png")); // creates black king
                 if(zrow == 0 && (zcol == 2 || zcol == 5))
-                    board[zrow][zcol] = new Piece(new Color(82, 69, 86), zrow, zcol, Type.bishop); // creates black bishops
+                    board[zrow][zcol] = new Piece(Color.black, zrow, zcol, Type.bishop, Toolkit.getDefaultToolkit().getImage("./b_pawn_png_shadow_128px.png")); // creates black bishops
                 if(zrow == 0 && (zcol == 1 || zcol == 6))
-                    board[zrow][zcol] = new Piece(new Color(82, 69, 86), zrow, zcol, Type.knight); // creates black knights
+                    board[zrow][zcol] = new Piece(Color.black, zrow, zcol, Type.knight, Toolkit.getDefaultToolkit().getImage("./b_pawn_png_shadow_128px.png")); // creates black knights
                 if(zrow == 0 && (zcol == 0 || zcol == 7))
-                    board[zrow][zcol] = new Piece(new Color(82, 69, 86), zrow, zcol, Type.rook); // creates black rooks
+                    board[zrow][zcol] = new Piece(Color.black, zrow, zcol, Type.rook, Toolkit.getDefaultToolkit().getImage("./b_pawn_png_shadow_128px.png")); // creates black rooks
                 
                
                 // white pieces
                 if (zrow == 6)
-                    board[zrow][zcol] = new Piece(new Color(250, 236, 226), zrow, zcol, Type.pawn); // creates white pawns
+                    board[zrow][zcol] = new Piece(Color.white, zrow, zcol, Type.pawn, Toolkit.getDefaultToolkit().getImage(".Pieces/b_pawn_png_shadow_128px.png")); // creates white pawns
                 if(zrow == 7 && zcol == 3)
-                    board[zrow][zcol] = new Piece(new Color(250, 236, 226), zrow, zcol, Type.queen); // creates white queen
+                    board[zrow][zcol] = new Piece(Color.white, zrow, zcol, Type.queen, Toolkit.getDefaultToolkit().getImage(".Pieces/b_pawn_png_shadow_128px.png")); // creates white queen
                 if(zrow == 7 && zcol == 4)
-                    board[zrow][zcol] = new Piece(new Color(250, 236, 226), zrow, zcol, Type.king); // creates white king
+                    board[zrow][zcol] = new Piece(Color.white, zrow, zcol, Type.king, Toolkit.getDefaultToolkit().getImage(".Pieces/b_pawn_png_shadow_128px.png")); // creates white king
                 if(zrow == 7 && (zcol == 2 || zcol == 5))
-                    board[zrow][zcol] = new Piece(new Color(250, 236, 226), zrow, zcol, Type.bishop); // creates white bishops
+                    board[zrow][zcol] = new Piece(Color.white, zrow, zcol, Type.bishop, Toolkit.getDefaultToolkit().getImage(".Pieces/b_pawn_png_shadow_128px.png")); // creates white bishops
                 if(zrow == 7 && (zcol == 1 || zcol == 6))
-                    board[zrow][zcol] = new Piece(new Color(250, 236, 226), zrow, zcol, Type.knight); // creates white knights
+                    board[zrow][zcol] = new Piece(Color.white, zrow, zcol, Type.knight, Toolkit.getDefaultToolkit().getImage(".Pieces/b_pawn_png_shadow_128px.png")); // creates white knights
                 if(zrow == 7 && (zcol == 0 || zcol == 7))
-                    board[zrow][zcol] = new Piece(new Color(250, 236, 226), zrow, zcol, Type.rook); // creates white rooks
+                    board[zrow][zcol] = new Piece(Color.white, zrow, zcol, Type.rook, Toolkit.getDefaultToolkit().getImage(".Pieces/b_pawn_png_shadow_128px.png")); // creates white rooks
                 
                 
                 // draws piece of board position is not null    
                if (board[zrow][zcol] != null)
-                    board[zrow][zcol].draw(g, zrow, zcol,xdelta, ydelta);
+                    board[zrow][zcol].draw(g, zrow, zcol,xdelta, ydelta, thisObj);
             }
         }        
     }

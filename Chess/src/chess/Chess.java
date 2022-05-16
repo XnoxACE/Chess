@@ -26,7 +26,11 @@ public class Chess extends JFrame implements Runnable {
 
                 if (e.BUTTON1 == e.getButton() ) {
                     // moves slectedPiece to new location on the board
-                    if(selectedPiece != null && Board.SelectPiece(g, e.getX(),e.getY()) == null){
+                    if(selectedPiece != null && Board.SelectPiece(g, e.getX(),e.getY()) == selectedPiece){
+                        selectedPiece.setHighlight(false);
+                        selectedPiece = null;
+                    }
+                    else if(selectedPiece != null && Board.SelectPiece(g, e.getX(),e.getY()) == null){
                         // David
                         // stops piece from being placed outside the board
                         int xVal = e.getX();
@@ -131,7 +135,7 @@ public class Chess extends JFrame implements Runnable {
         }
         
               
-        Board.Draw(g);
+        Board.Draw(g, this);
         
         
 

@@ -1,10 +1,12 @@
 package chess;
 import java.awt.*;
-import javax.swing.*;
+
+//import javax.print.attribute.PrintServiceAttributeSet;
+//import javax.swing.*;
 
 public class Piece {
     private Color color;
-    public static enum Type {
+    public enum Type {
         pawn, rook, bishop, knight, queen, king
     };
     private Type type;
@@ -13,16 +15,20 @@ public class Piece {
     Image pieceImage;
     private int row;
     private int col;
-    Piece(Color _color, int xpos, int ypos, Type _type)
+    Piece(Color _color, int _row, int _col, Type _type, Image _pieceImage)
     {
         color = _color;
-        row = xpos;
-        col = ypos;
+        row = _row;
+        col = _col;
         type = _type;
         //Rules pieceRules = new Rules(this);
-        pos = new Position(xpos, ypos);
+        pos = new Position(row, col);
         
-        //pieceImage = _pieceImage;
+        pieceImage = _pieceImage;
+    }
+    public void Init()
+    {    
+        pieceImage = Toolkit.getDefaultToolkit().getImage(".Pieces/b_bishop_png_shadow_128px.png.GIF");
     }
     public Color getColor(){
         return color;
@@ -65,16 +71,104 @@ public class Piece {
             col = zcol;
         }
     }
-    public void draw(Graphics2D g,int row,int column,int xdelta,int ydelta) {
+    public void draw(Graphics2D g,int row,int column,int xdelta,int ydelta, Chess thisObj) {
         
-        g.setColor(Color.black);
-        g.fillOval(Window.getX(column*xdelta), Window.getY(row*ydelta), xdelta, ydelta);
-        g.setColor(color);
-        g.fillOval(Window.getX(column*xdelta), Window.getY(row*ydelta), xdelta-3, ydelta-3);
+        if(color == Color.white){
+            g.setColor(Color.black);
+            g.fillOval(Window.getX(column*xdelta), Window.getY(row*ydelta), xdelta, ydelta);
+            g.setColor(color);
+            g.fillOval(Window.getX(column*xdelta), Window.getY(row*ydelta), xdelta-3, ydelta-3);
+        }
+        if(color == Color.black){
+            g.setColor(Color.white);
+            g.fillOval(Window.getX(column*xdelta), Window.getY(row*ydelta), xdelta, ydelta);
+            g.setColor(color);
+            g.fillOval(Window.getX(column*xdelta), Window.getY(row*ydelta), xdelta-3, ydelta-3);
+        }
         if(highlight){
-            g.setColor(Color.yellow);
+            g.setColor(new Color(186,202,68));
             g.fillOval(Window.getX(column*xdelta), Window.getY(row*ydelta), xdelta-3, ydelta-3);
             
         }
-    }    
+        if(color == Color.white){
+            if(type == Type.pawn){
+                
+                g.setColor(Color.black);
+                g.setFont(new Font("Arial", Font.PLAIN, 20));
+                g.drawString("P", Window.getX(0) + column * Window.getWidth2() / 8 + 10,
+                Window.getY(0) + row * Window.getHeight2() / 8 + 20);
+            }
+            if(type == Type.queen){
+                g.setColor(Color.black);
+                g.setFont(new Font("Arial", Font.PLAIN, 20));
+                g.drawString("Q", Window.getX(0) + column * Window.getWidth2() / 8 + 10,
+                Window.getY(0) + row * Window.getHeight2() / 8 + 20);
+            }
+            if(type == Type.king){
+                g.setColor(Color.black);
+                g.setFont(new Font("Arial", Font.PLAIN, 20));
+                g.drawString("K", Window.getX(0) + column * Window.getWidth2() / 8 + 10,
+                Window.getY(0) + row * Window.getHeight2() / 8 + 20);
+            }
+            if(type == Type.bishop){
+                g.setColor(Color.black);
+                g.setFont(new Font("Arial", Font.PLAIN, 20));
+                g.drawString("B", Window.getX(0) + column * Window.getWidth2() / 8 + 10,
+                Window.getY(0) + row * Window.getHeight2() / 8 + 20);
+            }
+            if(type == Type.knight){
+                g.setColor(Color.black);
+                g.setFont(new Font("Arial", Font.PLAIN, 20));
+                g.drawString("N", Window.getX(0) + column * Window.getWidth2() / 8 + 10,
+                Window.getY(0) + row * Window.getHeight2() / 8 + 20);
+            }
+            if(type == Type.rook){
+                g.setColor(Color.black);
+                g.setFont(new Font("Arial", Font.PLAIN, 20));
+                g.drawString("R", Window.getX(0) + column * Window.getWidth2() / 8 + 10,
+                Window.getY(0) + row * Window.getHeight2() / 8 + 20);
+            }
+        }
+        
+        if(color == Color.black){
+            if(type == Type.pawn){
+                g.setColor(Color.white);
+                g.setFont(new Font("Arial", Font.PLAIN, 20));
+                g.drawString("P", Window.getX(0) + column * Window.getWidth2() / 8 + 10,
+                Window.getY(0) + row * Window.getHeight2() / 8 + 20);
+            }
+            if(type == Type.queen){
+                g.setColor(Color.white);
+                g.setFont(new Font("Arial", Font.PLAIN, 20));
+                g.drawString("Q", Window.getX(0) + column * Window.getWidth2() / 8 + 10,
+                Window.getY(0) + row * Window.getHeight2() / 8 + 20);
+            }
+            if(type == Type.king){
+                g.setColor(Color.white);
+                g.setFont(new Font("Arial", Font.PLAIN, 20));
+                g.drawString("K", Window.getX(0) + column * Window.getWidth2() / 8 + 10,
+                Window.getY(0) + row * Window.getHeight2() / 8 + 20);
+            }
+            if(type == Type.bishop){
+                g.setColor(Color.white);
+                g.setFont(new Font("Arial", Font.PLAIN, 20));
+                g.drawString("B", Window.getX(0) + column * Window.getWidth2() / 8 + 10,
+                Window.getY(0) + row * Window.getHeight2() / 8 + 20);
+            }
+            if(type == Type.knight){
+                g.setColor(Color.white);
+                g.setFont(new Font("Arial", Font.PLAIN, 20));
+                g.drawString("N", Window.getX(0) + column * Window.getWidth2() / 8 + 10,
+                Window.getY(0) + row * Window.getHeight2() / 8 + 20);
+            }
+            if(type == Type.rook){
+                g.setColor(Color.white);
+                g.setFont(new Font("Arial", Font.PLAIN, 20));
+                g.drawString("R", Window.getX(0) + column * Window.getWidth2() / 8 + 10,
+                Window.getY(0) + row * Window.getHeight2() / 8 + 20);
+            }
+            
+        }    
+    }
 }
+
