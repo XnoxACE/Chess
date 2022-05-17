@@ -1,6 +1,8 @@
 package chess;
 import java.awt.*;
 
+import javax.imageio.ImageIO;
+
 import chess.Piece.Type;
 
 public class Board {
@@ -93,32 +95,32 @@ public class Board {
             {
                 // black pieces
                 if (zrow == 1)
-                    board[zrow][zcol] = new Piece(Color.black, zrow, zcol, Type.pawn, Toolkit.getDefaultToolkit().getImage("./b_pawn_png_shadow_128px.png")); // creates black pawns
+                    board[zrow][zcol] = new Piece(Color.black, zrow, zcol, Type.pawn); // creates black pawns
                 if(zrow == 0 && zcol == 3)
-                    board[zrow][zcol] = new Piece(Color.black, zrow, zcol, Type.queen, Toolkit.getDefaultToolkit().getImage("./b_pawn_png_shadow_128px.png")); // creates black queen
+                    board[zrow][zcol] = new Piece(Color.black, zrow, zcol, Type.queen); // creates black queen
                 if(zrow == 0 && zcol == 4)
-                    board[zrow][zcol] = new Piece(Color.black, zrow, zcol, Type.king, Toolkit.getDefaultToolkit().getImage("./b_pawn_png_shadow_128px.png")); // creates black king
+                    board[zrow][zcol] = new Piece(Color.black, zrow, zcol, Type.king); // creates black king
                 if(zrow == 0 && (zcol == 2 || zcol == 5))
-                    board[zrow][zcol] = new Piece(Color.black, zrow, zcol, Type.bishop, Toolkit.getDefaultToolkit().getImage("./b_pawn_png_shadow_128px.png")); // creates black bishops
+                    board[zrow][zcol] = new Piece(Color.black, zrow, zcol, Type.bishop); // creates black bishops
                 if(zrow == 0 && (zcol == 1 || zcol == 6))
-                    board[zrow][zcol] = new Piece(Color.black, zrow, zcol, Type.knight, Toolkit.getDefaultToolkit().getImage("./b_pawn_png_shadow_128px.png")); // creates black knights
+                    board[zrow][zcol] = new Piece(Color.black, zrow, zcol, Type.knight); // creates black knights
                 if(zrow == 0 && (zcol == 0 || zcol == 7))
-                    board[zrow][zcol] = new Piece(Color.black, zrow, zcol, Type.rook, Toolkit.getDefaultToolkit().getImage("./b_pawn_png_shadow_128px.png")); // creates black rooks
+                    board[zrow][zcol] = new Piece(Color.black, zrow, zcol, Type.rook); // creates black rooks
                 
                
                 // white pieces
                 if (zrow == 6)
-                    board[zrow][zcol] = new Piece(Color.white, zrow, zcol, Type.pawn, Toolkit.getDefaultToolkit().getImage(".Pieces/b_pawn_png_shadow_128px.png")); // creates white pawns
+                    board[zrow][zcol] = new Piece(Color.white, zrow, zcol, Type.pawn); // creates white pawns
                 if(zrow == 7 && zcol == 3)
-                    board[zrow][zcol] = new Piece(Color.white, zrow, zcol, Type.queen, Toolkit.getDefaultToolkit().getImage(".Pieces/b_pawn_png_shadow_128px.png")); // creates white queen
+                    board[zrow][zcol] = new Piece(Color.white, zrow, zcol, Type.queen); // creates white queen
                 if(zrow == 7 && zcol == 4)
-                    board[zrow][zcol] = new Piece(Color.white, zrow, zcol, Type.king, Toolkit.getDefaultToolkit().getImage(".Pieces/b_pawn_png_shadow_128px.png")); // creates white king
+                    board[zrow][zcol] = new Piece(Color.white, zrow, zcol, Type.king); // creates white king
                 if(zrow == 7 && (zcol == 2 || zcol == 5))
-                    board[zrow][zcol] = new Piece(Color.white, zrow, zcol, Type.bishop, Toolkit.getDefaultToolkit().getImage(".Pieces/b_pawn_png_shadow_128px.png")); // creates white bishops
+                    board[zrow][zcol] = new Piece(Color.white, zrow, zcol, Type.bishop); // creates white bishops
                 if(zrow == 7 && (zcol == 1 || zcol == 6))
-                    board[zrow][zcol] = new Piece(Color.white, zrow, zcol, Type.knight, Toolkit.getDefaultToolkit().getImage(".Pieces/b_pawn_png_shadow_128px.png")); // creates white knights
+                    board[zrow][zcol] = new Piece(Color.white, zrow, zcol, Type.knight); // creates white knights
                 if(zrow == 7 && (zcol == 0 || zcol == 7))
-                    board[zrow][zcol] = new Piece(Color.white, zrow, zcol, Type.rook, Toolkit.getDefaultToolkit().getImage(".Pieces/b_pawn_png_shadow_128px.png")); // creates white rooks
+                    board[zrow][zcol] = new Piece(Color.white, zrow, zcol, Type.rook); // creates white rooks
                 
                 
                 // draws piece of board position is not null    
